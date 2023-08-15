@@ -1,0 +1,42 @@
+<launch>
+<arg name="unite_imu_method_"          default=""/>
+
+<include file="$(find realsense2_camera)/launch/rs_camera.launch">
+</include>
+<arg name="unite_imu_method"         value="$(arg unite_imu_method_)"/>
+
+
+<include file="$(find realsense2_camera)/launch/rs_t265.launch">
+</include>
+
+<include file="$(find mavros)/launch/px4.launch">
+</include>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</launch>
