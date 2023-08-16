@@ -193,6 +193,7 @@ namespace realsense2_camera
         static std::string getNamespaceStr();
         void getParameters();
         void setupDevice();
+        void configureLocalizationParams(const ros::NodeHandle&);
         void setupErrorCallback();
         void setupPublishers();
         void enable_devices();

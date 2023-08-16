@@ -241,6 +241,7 @@ void BaseRealSenseNode::publishTopics()
 {
     getParameters();
     setupDevice();
+    configureLocalizationParams(_pnh);
     setupFilters();
     registerHDRoptions();
     registerDynamicReconfigCb(_node_handle);
@@ -957,6 +958,35 @@ void BaseRealSenseNode::setupDevice()
         throw;
     }
 }
+
+void BaseRealSenseNode::configureLocalizationParams(const ros::NodeHandle& _p_nh)
+{
+    ROS_INFO("Setting Localization Parameters.");
+
+    for(rs2::sensor sensor : _dev_sensors)
+    {
+        std::string module_name = create_graph_resource_name(sensor.get_info(RS2_CAMERA_INFO_NAME));
+        ROS_INFO_STREAM("module_name:" << module_name);
+        //
+        rs2_option option(rs2_option::RS2_OPTION_ENABLE_MAPPING);
+        if (sensor.supports(option))
+        {
+            try
+            {
+                bool user_value;
+                _p_nh.param("enable_mapping", user_value, true);
+                sensor.set_option(option, user_value);
+                auto option_value = sensor.get_option(option);
+                ROS_INFO_STREAM("RS2_OPTION_ENABLE_MAPPING: User value:" << user_value << " On device:" << option_value);
+            }
+            catch(const std::exception& e)
+            {
+                ROS_DEBUG_STREAM("Failed configure localization params:" << std::endl << e.what());
+            }
+        }
+    }
+}
+
 
 void BaseRealSenseNode::setupPublishers()
 {
