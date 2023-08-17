@@ -34,7 +34,7 @@ https://github.com/IntelRealSense/librealsense/blob/master/third-party/libtm/lib
   <arg name="unite_imu_method"      default="linear_interpolation"/>
 
   <arg name="publish_odom_tf"     default="true"/>
-  <arg name="enable_mapping"           default="true"/>
+  <arg name="enable_mapping"      default="true"/>
   <!-- <arg name="sensor_extrinsic_file"    default="$(find realsense2_camera)/launch/includes/sensor_extrinsic.yaml"/> -->
 
   <rosparam>/t265/tracking_module/enable_relocalization: false
@@ -71,7 +71,7 @@ https://github.com/IntelRealSense/librealsense/blob/master/third-party/libtm/lib
       <arg name="unite_imu_method"         value="$(arg unite_imu_method)"/>
 
       <arg name="publish_odom_tf"          value="$(arg publish_odom_tf)"/>
-      <arg name="enable_mapping"           value="$(arg enable_mapping)"/>
+      <!-- <arg name="enable_mapping"           value="$(arg enable_mapping)"/> -->
       <!-- <arg name="sensor_extrinsic_file"    value="$(arg sensor_extrinsic_file)"/> -->
     </include>
   </group>
